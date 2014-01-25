@@ -33,7 +33,7 @@ end
 
 #Create list of users similar to user 1
 
-similar_user_list = movie_database.most_similar("1")
+similar_user_list = movie_database.most_similar(1)
 
 #Print the top and bottom 10
 

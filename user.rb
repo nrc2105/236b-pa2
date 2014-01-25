@@ -11,9 +11,9 @@ class User
 
   #initializes the User with his or her first rating
   def initialize(rating)
-    move_id = rating.movie_id
-    @rating_list = {movie_id: rating}
+    @rating_list = {}
     @id = rating.user_id
+    add(rating)
   end
 
   #Adds a new rating
@@ -25,12 +25,29 @@ class User
   def similarity(other_user)
     similarity_count = 0
     @rating_list.each_value do |rating|
-      if other_rating = other_user.rating_list[rating.movie_id] and other_rating.rating.to_i >= rating.rating.to_i - 1 and other_rating.rating.to_i <= rating.rating.to_i + 1
+      if other_rating = other_user.rating_list[rating.movie_id] and \
+        other_rating.rating.to_i >= rating.rating.to_i - 1 and \
+        other_rating.rating.to_i <= rating.rating.to_i + 1
         similarity_count += 1
       end
     end
     return similarity_count
   end
+
+  #Returns all movies rated
+  def movies
+    movies = []
+    @rating_list.each_value do |rating|
+      movies << rating.movie_id
+    end
+    return movies
+  end
+
+  #Returns the rating given to movie m
+  def rating(m)
+    @rating_list[m].rating
+  end
+  
 
   def to_s
     "User #{@id}"

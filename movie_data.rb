@@ -25,8 +25,8 @@ class MovieData
   def read_in_movie_data(file_name)
     CSV.foreach(file_name, headers: "user_id\tmovie_id\trating\ttimestamp",\
                 col_sep:"\t") do |row|
-      temp_rating = Rating.new(row["user_id"],row["movie_id"],\
-                               row["rating"],row["timestamp"])
+      temp_rating = Rating.new(row["user_id"].to_i,row["movie_id"].to_i,\
+                               row["rating"].to_i,row["timestamp"].to_i)
       add_movie(temp_rating)
       add_user(temp_rating)
       @count = @count + 1
@@ -72,6 +72,21 @@ class MovieData
 
   #Using the similarity function, returns a list of similar users
   def most_similar(u)
-    @user_list.values.sort{|a,b| @user_list[u].similarity(b) <=> @user_list[u].similarity(a)}
+    @user_list.values.sort{|a,b|  @user_list[u].similarity(b) <=> @user_list[u].similarity(a)}
+  end
+
+  #Returns the rating a user u gave movie m in the training set, 0 if no rating
+  def rating(u, m)
+    @user_list[u].rating(m)
+  end
+
+  #Returns a floating point prediction as an estimate of what user u would
+  #rate movie m
+  def predict(u,m)
+  end
+
+  #Returns array of movies that user u has watched
+  def movies(u)
+    @user_list[u].movies
   end
 end

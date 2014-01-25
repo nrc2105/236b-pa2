@@ -13,12 +13,12 @@ class Movie
   #initializes the Movie with its first rating
   def initialize(rating)
     @id = rating.movie_id
-    @popularity = rating.rating.to_i - 3
+    @popularity = rating.rating - 3
   end
 
   #Add the newest rating (-3) to the popularity
   def add(rating)
-    @popularity += rating.rating.to_i - 3
+    @popularity += rating.rating - 3
   end
   
   def to_s
