@@ -17,6 +17,7 @@ class MovieData
   def initialize
     @movie_list = {}
     @user_list = {}
+    @test_set = []
     @count = 0
   end
 
@@ -27,9 +28,13 @@ class MovieData
                 col_sep:"\t") do |row|
       temp_rating = Rating.new(row["user_id"].to_i,row["movie_id"].to_i,\
                                row["rating"].to_i,row["timestamp"].to_i)
-      add_movie(temp_rating)
-      add_user(temp_rating)
-      @count = @count + 1
+      if count < 80000
+        add_movie(temp_rating)
+        add_user(temp_rating)
+        count += 1
+      else
+        @test_set << temp_rating
+      end
     end
   end
 
@@ -83,10 +88,25 @@ class MovieData
   #Returns a floating point prediction as an estimate of what user u would
   #rate movie m
   def predict(u,m)
+    viewer_list = []
+    viewers(m).each do |id|
+      viewer_list << @user_list[id]
+    end
+    @user_list[u].predict(m, viewer_list)
   end
 
   #Returns array of movies that user u has watched
   def movies(u)
     @user_list[u].movies
   end
+
+  #Returns the viewers of a movie
+  def viewers(m)
+    @movie_list[m].viewers
+  end
+
+  #Runs the specified number of tests
+  def run_test(k)
+    k ||= @test_set.size
+    return MovieTest.new(k, @test_set)
 end

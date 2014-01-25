@@ -48,6 +48,17 @@ class User
     @rating_list[m].rating
   end
   
+  #Returns the predicted rating
+  def predict(m, viewer_list)
+    prediction = 0
+    similarity_tally = 0
+    viewer_list.each do |viewer|
+      sim = similarity(viewer) 
+      similarity_tally += sim
+      prediction += sim * viewer.rating_list[m].rating
+    end
+    return prediction/similarity_tally.to_f
+  end
 
   def to_s
     "User #{@id}"
