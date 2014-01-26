@@ -21,11 +21,6 @@ class MovieData
     @test_set = []
     @count = 1
   end
-  
-  def initialize(file_name)
-    self.initialize
-    read_in_movie_data(file_name)
-  end
 
   #Reads in a file separated by tabs and creates a new rating, 
   #then calls the appropriate add methods
@@ -34,7 +29,7 @@ class MovieData
                 col_sep:"\t") do |row|
       temp_rating = Rating.new(row["user_id"].to_i,row["movie_id"].to_i,\
                                row["rating"].to_i,row["timestamp"].to_i)
-      add_rating(rating)
+      add_rating(temp_rating)
     end
   end
 
