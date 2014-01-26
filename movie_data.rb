@@ -8,6 +8,7 @@ require 'csv'
 require_relative 'rating'
 require_relative 'movie'
 require_relative 'user'
+require_relative 'movie_test'
 
 class MovieData
 
@@ -28,13 +29,18 @@ class MovieData
                 col_sep:"\t") do |row|
       temp_rating = Rating.new(row["user_id"].to_i,row["movie_id"].to_i,\
                                row["rating"].to_i,row["timestamp"].to_i)
-      if count < 80000
-        add_movie(temp_rating)
-        add_user(temp_rating)
-        count += 1
-      else
-        @test_set << temp_rating
-      end
+      add_rating(rating)
+    end
+  end
+
+  #Adds ratings either to the user/movie list or the test set
+  def add_rating(rating)
+    if @count < 6
+      add_movie(rating)
+      add_user(rating)
+      @count += 1
+    else
+      @test_set << rating
     end
   end
 
@@ -108,5 +114,6 @@ class MovieData
   #Runs the specified number of tests
   def run_test(k)
     k ||= @test_set.size
-    return MovieTest.new(k, @test_set)
+    return MovieTest.new(k, @test_set, self)
+  end
 end
