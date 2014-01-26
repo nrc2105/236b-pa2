@@ -1,0 +1,5 @@
+pa2 is an extension of pa1.  In addition to all of the classes from pa1, pa2 includes a modified
+MovieData class, a MovieTest class, and a Prediction class.  The modifications to the MovieData
+class were to assist MovieTest and allow for a prediction algorithm that predicts what a user will
+rank a movie based on the users that have already ranked the movie.  Specifics on methods can be
+found in the documentation.
