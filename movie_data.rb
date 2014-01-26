@@ -19,7 +19,12 @@ class MovieData
     @movie_list = {}
     @user_list = {}
     @test_set = []
-    @count = 0
+    @count = 1
+  end
+  
+  def initialize(file_name)
+    self.initialize
+    read_in_movie_data(file_name)
   end
 
   #Reads in a file separated by tabs and creates a new rating, 
@@ -35,7 +40,7 @@ class MovieData
 
   #Adds ratings either to the user/movie list or the test set
   def add_rating(rating)
-    if @count < 6
+    if @count < 80000
       add_movie(rating)
       add_user(rating)
       @count += 1
@@ -111,9 +116,13 @@ class MovieData
     @movie_list[m].viewers
   end
 
+  #Runs all tests
+  def run_test
+    return run_test(@test_set.size)
+  end
+
   #Runs the specified number of tests
   def run_test(k)
-    k ||= @test_set.size
     return MovieTest.new(k, @test_set, self)
   end
 end
