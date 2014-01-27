@@ -9,11 +9,9 @@ class User
 
   attr_reader :rating_list
 
-  #initializes the User with his or her first rating
-  def initialize(rating)
+  #initializes the User with an empty rating list
+  def initialize
     @rating_list = {}
-    @id = rating.user_id
-    add(rating)
   end
 
   #Adds a new rating
@@ -61,6 +59,6 @@ class User
   end
 
   def to_s
-    "User #{@id}"
+    "User #{@rating_list.values[0].user_id}"
   end
 end
