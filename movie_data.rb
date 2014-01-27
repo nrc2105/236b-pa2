@@ -14,7 +14,7 @@ class MovieData
     @movie_list = {}
     @user_list = {}
     @test_set = []
-    @count = 1
+    @count = 0
   end
 
   #Reads in a file separated by tabs and creates a new rating, then calls the appropriate add methods
@@ -82,14 +82,10 @@ class MovieData
     @user_list[u].predict(m, viewer_list)
   end
 
-  #Returns array of movies that user u has watched
-  def movies(u)
-    @user_list[u].movies
-  end
-
   #Returns the viewers of a movie
   def viewers(m)
-    @movie_list[m].viewers
+    return @movie_list[m].viewers unless @movie_list[m] == nil
+    return []
   end
 
   #Runs the specified number of tests

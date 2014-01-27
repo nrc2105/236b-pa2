@@ -43,11 +43,13 @@ class User
 
   #Returns the rating given to movie m
   def rating(m)
-    @rating_list[m].rating
+    return @rating_list[m].rating unless @rating_list[m] == nil
+    return 0
   end
   
-  #Returns the predicted rating
+  #Returns the predicted rating, 3 if no one has seen the movie yet
   def predict(m, viewer_list)
+    return 3 if viewer_list.size == 0
     prediction = 0
     similarity_tally = 0
     viewer_list.each do |viewer|
