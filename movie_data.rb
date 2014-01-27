@@ -11,8 +11,6 @@ require_relative 'movie_test'
 
 class MovieData
 
-  attr_reader :user_list
-  
   #Initializes empty hashes of movies and users
   def initialize
     @movie_list = {}
@@ -24,8 +22,7 @@ class MovieData
   #Reads in a file separated by tabs and creates a new rating, then calls the appropriate add methods
   def read_in_movie_data(file_name)
     CSV.foreach(file_name, headers: "user_id\tmovie_id\trating\ttimestamp",col_sep:"\t") do |row|
-      temp_rating = Rating.new(row["user_id"].to_i,row["movie_id"].to_i,row["rating"].to_i,row["timestamp"].to_i)
-      add_rating(temp_rating)
+      add_rating(Rating.new(row["user_id"].to_i,row["movie_id"].to_i,row["rating"].to_i,row["timestamp"].to_i))
     end
   end
 
@@ -54,11 +51,8 @@ class MovieData
 
   #If the desired movie is on the list, returns the popularity
   def popularity(id_number)
-    if temp_movie = @movie_list[id_number]
-      return temp_movie.popularity
-    else
-      return "Movie not in data set"
-    end
+    return temp_movie = @movie_list[id_number].popularity unless @movie_list[id_number] == nil
+    return 0
   end
 
   #Creates and print out a list of movies in order of popularity
@@ -99,11 +93,6 @@ class MovieData
   def viewers(m)
     @movie_list[m].viewers
   end
-
-  #Runs all tests
- # def run_test
-  #  return run_test(@test_set.size)
- # end
 
   #Runs the specified number of tests
   def run_test(*args)
