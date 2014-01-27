@@ -98,7 +98,7 @@
 
   <ul>
   
-    <li class="file"><a href="./README_md.html">README</a>
+    <li class="file"><a href="./README.html">README</a>
   
     <li class="file"><a href="./doc/created_rid.html">created.rid</a>
   
@@ -145,14 +145,6 @@
     <li class="file"><a href="./ml-100k/ub_base.html">ub.base</a>
   
     <li class="file"><a href="./ml-100k/ub_test.html">ub.test</a>
-  
-    <li class="file"><a href="./movie_test_rb~.html">movie_test.rb~</a>
-  
-    <li class="file"><a href="./prediction_rb~.html">prediction.rb~</a>
-  
-    <li class="file"><a href="./test_rb~.html">test.rb~</a>
-  
-    <li class="file"><a href="./test2_rb~.html">test2.rb~</a>
   
   </ul>
 </nav>
@@ -229,7 +221,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(rating)</span>
+            class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -238,17 +230,15 @@
 
         <div class="method-description">
           
-          <p>initializes the <a href="User.html">User</a> with his or her first rating</p>
+          <p>initializes the <a href="User.html">User</a> with an empty rating list</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File user.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">rating</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@rating_list</span> = {}
-  <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">rating</span>.<span class="ruby-identifier">user_id</span>
-  <span class="ruby-identifier">add</span>(<span class="ruby-identifier">rating</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -285,7 +275,7 @@
 
           
           <div class="method-source-code" id="add-source">
-            <pre><span class="ruby-comment"># File user.rb, line 20</span>
+            <pre><span class="ruby-comment"># File user.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">rating</span>)
   <span class="ruby-ivar">@rating_list</span>[<span class="ruby-identifier">rating</span>.<span class="ruby-identifier">movie_id</span>] = <span class="ruby-identifier">rating</span>
 <span class="ruby-keyword">end</span></pre>
@@ -318,7 +308,7 @@
 
           
           <div class="method-source-code" id="movies-source">
-            <pre><span class="ruby-comment"># File user.rb, line 38</span>
+            <pre><span class="ruby-comment"># File user.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">movies</span>
   <span class="ruby-identifier">movies</span> = []
   <span class="ruby-ivar">@rating_list</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rating</span><span class="ruby-operator">|</span>
@@ -349,14 +339,15 @@
 
         <div class="method-description">
           
-          <p>Returns the predicted rating</p>
+          <p>Returns the predicted rating, 3 if no one has seen the movie yet</p>
           
           
 
           
           <div class="method-source-code" id="predict-source">
-            <pre><span class="ruby-comment"># File user.rb, line 52</span>
+            <pre><span class="ruby-comment"># File user.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">predict</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">viewer_list</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-value">3</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">viewer_list</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
   <span class="ruby-identifier">prediction</span> = <span class="ruby-value">0</span>
   <span class="ruby-identifier">similarity_tally</span> = <span class="ruby-value">0</span>
   <span class="ruby-identifier">viewer_list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">viewer</span><span class="ruby-operator">|</span>
@@ -395,9 +386,10 @@
 
           
           <div class="method-source-code" id="rating-source">
-            <pre><span class="ruby-comment"># File user.rb, line 47</span>
+            <pre><span class="ruby-comment"># File user.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">rating</span>(<span class="ruby-identifier">m</span>)
-  <span class="ruby-ivar">@rating_list</span>[<span class="ruby-identifier">m</span>].<span class="ruby-identifier">rating</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@rating_list</span>[<span class="ruby-identifier">m</span>].<span class="ruby-identifier">rating</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@rating_list</span>[<span class="ruby-identifier">m</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- rating-source -->
           
@@ -428,7 +420,7 @@
 
           
           <div class="method-source-code" id="similarity-source">
-            <pre><span class="ruby-comment"># File user.rb, line 25</span>
+            <pre><span class="ruby-comment"># File user.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">similarity</span>(<span class="ruby-identifier">other_user</span>)
   <span class="ruby-identifier">similarity_count</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@rating_list</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rating</span><span class="ruby-operator">|</span>
@@ -469,7 +461,7 @@
           <div class="method-source-code" id="to_s-source">
             <pre><span class="ruby-comment"># File user.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-node">&quot;User #{@id}&quot;</span>
+  <span class="ruby-node">&quot;User #{@rating_list.values[0].user_id}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- to_s-source -->
           

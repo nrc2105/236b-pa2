@@ -77,8 +77,6 @@
     
     <li ><a href="#method-i-add">#add</a>
     
-    <li ><a href="#method-i-to_s">#to_s</a>
-    
   </ul>
 </nav>
 
@@ -90,7 +88,7 @@
 
   <ul>
   
-    <li class="file"><a href="./README_md.html">README</a>
+    <li class="file"><a href="./README.html">README</a>
   
     <li class="file"><a href="./doc/created_rid.html">created.rid</a>
   
@@ -137,14 +135,6 @@
     <li class="file"><a href="./ml-100k/ub_base.html">ub.base</a>
   
     <li class="file"><a href="./ml-100k/ub_test.html">ub.test</a>
-  
-    <li class="file"><a href="./movie_test_rb~.html">movie_test.rb~</a>
-  
-    <li class="file"><a href="./prediction_rb~.html">prediction.rb~</a>
-  
-    <li class="file"><a href="./test_rb~.html">test.rb~</a>
-  
-    <li class="file"><a href="./test2_rb~.html">test2.rb~</a>
   
   </ul>
 </nav>
@@ -234,7 +224,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(rating)</span>
+            class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -243,18 +233,17 @@
 
         <div class="method-description">
           
-          <p>initializes the <a href="Movie.html">Movie</a> with its first rating</p>
+          <p>initializes the <a href="Movie.html">Movie</a> with empty popularity and
+viewer lists</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File movie.rb, line 14</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">rating</span>)
-  <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">rating</span>.<span class="ruby-identifier">movie_id</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@popularity</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@viewers</span> = []
-  <span class="ruby-identifier">add</span>(<span class="ruby-identifier">rating</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -291,7 +280,7 @@
 
           
           <div class="method-source-code" id="add-source">
-            <pre><span class="ruby-comment"># File movie.rb, line 22</span>
+            <pre><span class="ruby-comment"># File movie.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">rating</span>)
   <span class="ruby-ivar">@popularity</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">rating</span>.<span class="ruby-identifier">rating</span> <span class="ruby-operator">-</span> <span class="ruby-value">3</span>
   <span class="ruby-ivar">@viewers</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">rating</span>.<span class="ruby-identifier">user_id</span>
@@ -304,39 +293,6 @@
 
         
       </div><!-- add-method -->
-
-    
-      <div id="method-i-to_s" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_s</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File movie.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-node">&quot;Movie #{@id}&quot;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- to_s-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- to_s-method -->
 
     
     </section><!-- public-instance-method-details -->
