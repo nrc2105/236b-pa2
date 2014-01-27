@@ -24,7 +24,6 @@ class MovieTest
   #Runs the test predictions
   def run_test
     for i in 0..@count-1
-      puts "I: #{i} UID: #{@test_set[i].user_id} MID: #{@test_set[i].movie_id} "
       @predictions << Prediction.new(@test_set[i].user_id,@test_set[i].movie_id, @test_set[i].rating,@database.predict(@test_set[i].user_id, @test_set[i].movie_id))
     end
   end
