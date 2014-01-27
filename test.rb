@@ -16,7 +16,10 @@ puts "User 1 rated movie 1: #{z.rating(1, 1)}"
 puts "Movie 2 has been seen by: #{z.viewers(2)}"
 puts "User 1 will rate movie 3: #{z.predict(1,3)}"
 
-mov_test = z.run_test(1)
+puts "Popularity of movie 1: #{z.popularity(1)}"
+puts "Popularity of movie 47: #{z.popularity(47)}"
+
+mov_test = z.run_test
 
 puts mov_test.predictions
 

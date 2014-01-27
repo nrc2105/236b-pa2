@@ -1,8 +1,6 @@
 ###################################################################################
 #The MovieData class reads in the file, and stores it as a list of users and movies
-#Nicholas Cummins
-#ncummins@brandeis.edu
-
+#Nicholas Cummins ncummins@brandeis.edu
 require 'csv'
 require_relative 'rating'
 require_relative 'movie'
@@ -10,7 +8,7 @@ require_relative 'user'
 require_relative 'movie_test'
 
 class MovieData
-
+  TRAINING_SET_SIZE = 80000
   #Initializes empty hashes of movies and users
   def initialize
     @movie_list = {}
@@ -28,7 +26,7 @@ class MovieData
 
   #Adds ratings either to the user/movie list or the test set
   def add_rating(rating)
-    if @count < 7
+    if @count < TRAINING_SET_SIZE
       add_movie(rating)
       add_user(rating)
       @count += 1
