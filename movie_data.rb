@@ -87,6 +87,10 @@ class MovieData
     return @movie_list[m].viewers unless @movie_list[m] == nil
     return []
   end
+  #Returns movies that a user has seen
+  def movies(u)
+    @user_list[u].movies
+  end
 
   #Runs the specified number of tests
   def run_test(*args)
