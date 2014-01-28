@@ -8,6 +8,7 @@ require_relative 'user'
 require_relative 'movie_test'
 
 class MovieData
+  attr_accessor :movie_list, :user_list
   TRAINING_SET_SIZE = 80000
   #Initializes empty hashes of movies and users
   def initialize
@@ -73,7 +74,7 @@ class MovieData
     @user_list[u].rating(m)
   end
 
-  #Returns a floating point prediction as an estimate of what user u would rate movie m
+  #Returns a floating point prediction as an estimate of what user u would rate movie m, 3 if no data
   def predict(u,m)
     viewer_list = []
     viewers(m).each do |id|

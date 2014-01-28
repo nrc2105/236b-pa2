@@ -5,7 +5,7 @@
 
 class Prediction
 
-  attr_reader :rating, :prediction, :error
+  attr_reader :rating, :prediction, :error, :user, :movie
   def initialize(u, m, r, p)
     @user = u
     @movie = m

@@ -19,7 +19,7 @@ class User
     @rating_list[rating.movie_id] = rating
   end
 
-  #Compares the similarity of two users in terms of movies rated
+  #Compares the similarity of two users in terms of movies rated and rates out of 100
   def similarity(other_user)
     similarity_count = 0
     @rating_list.each_value do |rating|
@@ -50,15 +50,16 @@ class User
   #Returns the predicted rating, 3 if no one has seen the movie yet
   def predict(m, viewer_list)
     return 3 if viewer_list.size == 0
-    prediction = 0
-    similarity_tally = 0
+    prediction, similarity_tally = 0, 0
     viewer_list.each do |viewer|
-      sim = similarity(viewer) 
+      sim = similarity(viewer)
       similarity_tally += sim
       prediction += sim * viewer.rating_list[m].rating
     end
-    return prediction/similarity_tally.to_f
+    return prediction/similarity_tally.to_f unless similarity_tally == 0
+    return 3
   end
+   
 
   def to_s
     "User #{@rating_list.values[0].user_id}"

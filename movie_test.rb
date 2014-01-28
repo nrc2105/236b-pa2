@@ -32,7 +32,8 @@ class MovieTest
   def mean_calc
     error = 0
     @predictions.each do |p|
-      error += p.error
+      puts "User: #{p.user} Movie: #{p.movie}" if p.error.to_f.nan?
+      error += p.error.abs
     end
     return error/@predictions.size.to_f
   end
@@ -54,7 +55,6 @@ class MovieTest
     end
     return Math.sqrt(p_error/predictions.size)
   end
-
 end
   
     
