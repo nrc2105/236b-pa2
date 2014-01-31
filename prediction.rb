@@ -11,7 +11,7 @@ class Prediction
     @movie = m
     @rating = r
     @prediction = p
-    @error = @rating - @prediction
+    @error = (@rating - @prediction).abs/@rating
   end
 
   def to_s

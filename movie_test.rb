@@ -33,7 +33,7 @@ class MovieTest
     error = 0
     @predictions.each do |p|
       puts "User: #{p.user} Movie: #{p.movie}" if p.error.to_f.nan?
-      error += p.error.abs
+      error += p.error
     end
     return error/@predictions.size.to_f
   end

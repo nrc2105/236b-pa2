@@ -59,7 +59,6 @@ class User
     return prediction/similarity_tally.to_f unless similarity_tally == 0
     return 3
   end
-   
 
   def to_s
     "User #{@rating_list.values[0].user_id}"
